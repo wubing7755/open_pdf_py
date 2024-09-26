@@ -1,5 +1,3 @@
-# -*- coding: GBK -*-
-
 import subprocess
 
 from src.funcs import read_pdf
@@ -10,27 +8,27 @@ from src.models import Stack
 
 
 def main():
-    # ¶ÁÈ¡pdfÎÄ¼ş£¬²¢Ğ´ÈëtxtÎÄ¼şÖĞ
+    # è¯»å–pdfæ–‡ä»¶ï¼Œå¹¶å†™å…¥txtæ–‡ä»¶ä¸­
     #read_pdf()
 
     stack = Stack()
 
-    nums = input("ÇëÊäÈëÒ»´®Êı×Ö£¬ÒÔ ',' ·Ö¸ô£º").split(',')
+    nums = input("è¯·è¾“å…¥ä¸€ä¸²æ•°å­—ï¼Œä»¥ ',' åˆ†éš”ï¼š").split(',')
 
     for num in nums:
         stack.push(num)
 
     stack.print_stack()
 
-    # ¸´Ô­
+    # å¤åŸ
     redo(stack)
     stack.print_stack()
 
-    # ³·Ïú
+    # æ’¤é”€
     undo(stack)
     stack.print_stack()
 
 if __name__ == "__main__":
-    # ´ò¿ªÃüÁîÌáÊ¾·û²¢Ö´ĞĞ 'cls' ÃüÁî
+    # æ‰“å¼€å‘½ä»¤æç¤ºç¬¦å¹¶æ‰§è¡Œ 'cls' å‘½ä»¤
     subprocess.run("cmd.exe /c cls", shell=True)
     main()

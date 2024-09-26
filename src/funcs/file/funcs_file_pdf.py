@@ -1,42 +1,40 @@
-# -*- coding: GBK -*-
-
 from ast import Import
-import pymupdf  # Ê¹ÓÃ PyMuPDF µÄĞÂÄ£¿éÃû³Æ
+import pymupdf  # ä½¿ç”¨ PyMuPDF çš„æ–°æ¨¡å—åç§°
 import subprocess
 from pathlib import Path
 
 def read_pdf():
-    pdf_file_name = input("ÇëÊäÈëpdfÎÄ¼şÃû£º") + ".pdf"
+    pdf_file_name = input("è¯·è¾“å…¥pdfæ–‡ä»¶åï¼š") + ".pdf"
 
-    # ÎÄ¼şÂ·¾¶Ãû
+    # æ–‡ä»¶è·¯å¾„å
     base_path = Path(r"C:\Users\xuanit\Desktop\docTest")
-    pdf_path = base_path / pdf_file_name  # Ê¹ÓÃ Path ¶ÔÏóÆ´½ÓÂ·¾¶
+    pdf_path = base_path / pdf_file_name  # ä½¿ç”¨ Path å¯¹è±¡æ‹¼æ¥è·¯å¾„
 
-    print(f"pdfÎÄ¼şÂ·¾¶£º {pdf_path}")
+    print(f"pdfæ–‡ä»¶è·¯å¾„ï¼š {pdf_path}")
 
-    # ´ò¿ªpdfÎÄµµ
+    # æ‰“å¼€pdfæ–‡æ¡£
     try:
         doc = pymupdf.Document(pdf_path, filetype="pdf")
     except Exception as e:
-        print(f"´ò¿ª PDF ÎÄ¼şÊ±³ö´í: {e}")
+        print(f"æ‰“å¼€ PDF æ–‡ä»¶æ—¶å‡ºé”™: {e}")
         return
 
-    # ĞÂ½¨ÎÄ±¾ÎÄ¼ş
-    txt_file_name = input("ÇëÊäÈëtxtÎÄ¼şÃû£º") + ".txt"
+    # æ–°å»ºæ–‡æœ¬æ–‡ä»¶
+    txt_file_name = input("è¯·è¾“å…¥txtæ–‡ä»¶åï¼š") + ".txt"
     txt_file_path = base_path / txt_file_name
-    print(f"ÎÄ±¾ÎÄ¼şÂ·¾¶£º {txt_file_path}")
+    print(f"æ–‡æœ¬æ–‡ä»¶è·¯å¾„ï¼š {txt_file_path}")
     with open(txt_file_path, "w") as new_txt:
-        # ±éÀúpdfÎÄµµ£¬½«ÄÚÈİĞ´µ½txtÎÄ¼şÖĞ
+        # éå†pdfæ–‡æ¡£ï¼Œå°†å†…å®¹å†™åˆ°txtæ–‡ä»¶ä¸­
         for page in doc:
             text = page.get_text()
             new_txt.write(text + "\n")
 
-        # ´òÓ¡pdfÒ³Êı
+        # æ‰“å°pdfé¡µæ•°
         new_txt.write(f"page_count:{doc.page_count}")
 
 
         new_txt.close()
 
-    print(f"PDF ÄÚÈİÒÑ³É¹¦Ğ´Èë {txt_file_path}")
-    # Ê¹ÓÃ subprocess ´ò¿ªÎÄ¼ş×ÊÔ´¹ÜÀíÆ÷
+    print(f"PDF å†…å®¹å·²æˆåŠŸå†™å…¥ {txt_file_path}")
+    # ä½¿ç”¨ subprocess æ‰“å¼€æ–‡ä»¶èµ„æºç®¡ç†å™¨
     subprocess.run(["explorer", txt_file_path])
