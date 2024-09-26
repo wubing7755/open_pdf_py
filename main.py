@@ -15,9 +15,11 @@ def main():
 
     stack = Stack()
 
-    stack.push(1)
-    stack.push(2)
-    stack.push(3)
+    nums = input("请输入一串数字，以 ',' 分隔：").split(',')
+
+    for num in nums:
+        stack.push(num)
+
     stack.print_stack()
 
     # 复原
